@@ -1,0 +1,67 @@
+enviar_autoleitura:
+  name: Enviar autoleitura
+  description: Envia a leitura do hidrômetro (autoleitura) de um imóvel.
+  fields:
+    matricula:
+      name: Matrícula
+      required: true
+      selector:
+        text:
+    leitura:
+      name: Leitura (m³)
+      required: true
+      selector:
+        number:
+          min: 0
+          mode: box
+    config_entry_id:
+      name: Conta
+      selector:
+        text:
+
+adicionar_imovel:
+  name: Adicionar imóvel
+  description: Vincula um imóvel (matrícula) à conta pelo CPF/CNPJ do titular.
+  fields:
+    matricula:
+      name: Matrícula
+      required: true
+      selector:
+        text:
+    cpf_cnpj:
+      name: CPF/CNPJ
+      required: true
+      selector:
+        text:
+    config_entry_id:
+      name: Conta
+      selector:
+        text:
+
+remover_imovel:
+  name: Remover imóvel
+  description: Desvincula um imóvel da conta.
+  fields:
+    matricula:
+      name: Matrícula
+      required: true
+      selector:
+        text:
+    config_entry_id:
+      name: Conta
+      selector:
+        text:
+
+segunda_via:
+  name: Segunda via
+  description: Retorna a 2ª via de uma conta (link/base64).
+  fields:
+    id_conta:
+      name: ID da conta
+      required: true
+      selector:
+        text:
+    config_entry_id:
+      name: Conta
+      selector:
+        text:

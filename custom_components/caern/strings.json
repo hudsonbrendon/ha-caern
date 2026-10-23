@@ -1,0 +1,70 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "CAERN",
+        "description": "Enter the CAERN app e-mail and password (email/password login). Google/Facebook accounts won't work here.",
+        "data": {
+          "email": "E-mail",
+          "password": "Password"
+        }
+      }
+    },
+    "error": {
+      "cannot_connect": "Failed to connect to CAERN.",
+      "invalid_auth": "Invalid e-mail or password.",
+      "unknown": "Unexpected error."
+    },
+    "abort": {
+      "already_configured": "This account is already configured."
+    }
+  },
+  "entity": {
+    "sensor": {
+      "conta": {
+        "name": "Current bill"
+      },
+      "consumo": {
+        "name": "Metered consumption"
+      },
+      "consumo_historico": {
+        "name": "Consumption (history)"
+      },
+      "situacao": {
+        "name": "Status"
+      },
+      "contas": {
+        "name": "Open bills"
+      },
+      "imoveis": {
+        "name": "Properties"
+      },
+      "registrosAbertos": {
+        "name": "Open tickets"
+      }
+    },
+    "binary_sensor": {
+      "ocorrencia": {
+        "name": "Outage / water issue"
+      }
+    }
+  },
+  "services": {
+    "enviar_autoleitura": {
+      "name": "Submit self-reading",
+      "description": "Submits a property's water meter reading."
+    },
+    "adicionar_imovel": {
+      "name": "Add property",
+      "description": "Links a property by registration + tax id."
+    },
+    "remover_imovel": {
+      "name": "Remove property",
+      "description": "Unlinks a property."
+    },
+    "segunda_via": {
+      "name": "Bill copy",
+      "description": "Returns a bill's second copy."
+    }
+  }
+}

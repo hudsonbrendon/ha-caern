@@ -1,0 +1,70 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "CAERN",
+        "description": "Entre com o e-mail e a senha do app CAERN (login por e-mail/senha). Contas criadas com Google/Facebook não funcionam aqui.",
+        "data": {
+          "email": "E-mail",
+          "password": "Senha"
+        }
+      }
+    },
+    "error": {
+      "cannot_connect": "Falha ao conectar na CAERN.",
+      "invalid_auth": "E-mail ou senha inválidos.",
+      "unknown": "Erro inesperado."
+    },
+    "abort": {
+      "already_configured": "Essa conta já está configurada."
+    }
+  },
+  "entity": {
+    "sensor": {
+      "conta": {
+        "name": "Conta atual"
+      },
+      "consumo": {
+        "name": "Consumo medido"
+      },
+      "consumo_historico": {
+        "name": "Consumo (histórico)"
+      },
+      "situacao": {
+        "name": "Situação"
+      },
+      "contas": {
+        "name": "Contas em aberto"
+      },
+      "imoveis": {
+        "name": "Imóveis"
+      },
+      "registrosAbertos": {
+        "name": "Registros abertos"
+      }
+    },
+    "binary_sensor": {
+      "ocorrencia": {
+        "name": "Ocorrência / falta d'água"
+      }
+    }
+  },
+  "services": {
+    "enviar_autoleitura": {
+      "name": "Enviar autoleitura",
+      "description": "Envia a leitura do hidrômetro de um imóvel."
+    },
+    "adicionar_imovel": {
+      "name": "Adicionar imóvel",
+      "description": "Vincula um imóvel pela matrícula + CPF/CNPJ."
+    },
+    "remover_imovel": {
+      "name": "Remover imóvel",
+      "description": "Desvincula um imóvel."
+    },
+    "segunda_via": {
+      "name": "Segunda via",
+      "description": "Retorna a 2ª via de uma conta."
+    }
+  }
+}
