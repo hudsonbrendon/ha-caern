@@ -11,7 +11,7 @@ import pathlib
 import sys
 import types
 
-for _name in ("aiohttp", "async_timeout"):
+for _name in ("aiohttp",):
     sys.modules.setdefault(_name, types.ModuleType(_name))
 
 _API = (

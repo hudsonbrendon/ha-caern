@@ -1,0 +1,30 @@
+[tool.ruff]
+target-version = "py314"
+line-length = 88
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B", "D", "ANN", "ASYNC", "RUF"]
+ignore = ["D203", "D213", "ANN401", "RUF012", "E501"]
+
+[tool.ruff.lint.pydocstyle]
+convention = "google"
+
+[tool.ruff.lint.isort]
+force-sort-within-sections = true
+combine-as-imports = true
+known-first-party = ["custom_components.caern"]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/**" = ["D", "ANN", "RUF", "ASYNC"]
+"scripts/**" = ["D", "ANN", "ASYNC"]
+
+[tool.mypy]
+python_version = "3.14"
+strict = true
+warn_unreachable = true
+ignore_missing_imports = true
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+asyncio_mode = "auto"
+addopts = "-q -p no:cacheprovider --cov=custom_components.caern --cov-report=term-missing"

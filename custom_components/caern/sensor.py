@@ -11,19 +11,20 @@ from .entity import CaernImovelEntity
 
 if TYPE_CHECKING:
     from homeassistant.core import HomeAssistant
-    from homeassistant.helpers.entity_platform import AddEntitiesCallback
+    from homeassistant.helpers.entity_platform import AddConfigEntryEntitiesCallback
 
-    from .coordinator import CaernDataUpdateCoordinator
-    from .data import CaernConfigEntry
+    from .coordinator import CaernConfigEntry, CaernDataUpdateCoordinator
+
+PARALLEL_UPDATES = 0
 
 
 async def async_setup_entry(
     hass: HomeAssistant,
     entry: CaernConfigEntry,
-    async_add_entities: AddEntitiesCallback,
+    async_add_entities: AddConfigEntryEntitiesCallback,
 ) -> None:
     """Cria sensores por imóvel + resumo global."""
-    coordinator = entry.runtime_data.coordinator
+    coordinator = entry.runtime_data
     entities: list[SensorEntity] = [
         CaernContasAbertasSensor(coordinator),
         CaernImoveisSensor(coordinator),
@@ -204,7 +205,7 @@ class _ResumoSensor(CoordinatorEntity["CaernDataUpdateCoordinator"], SensorEntit
     _attr_state_class = SensorStateClass.MEASUREMENT
 
     def __init__(self, coordinator: CaernDataUpdateCoordinator, key: str) -> None:
-        """key = campo de `quantidades`."""
+        """Key = campo de `quantidades`."""
         super().__init__(coordinator)
         self._key = key
         self._attr_unique_id = f"caern_{key}"
