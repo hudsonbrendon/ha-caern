@@ -13,9 +13,12 @@ from .api import CaernApiError, CaernAuthError
 from .const import DEFAULT_SCAN_INTERVAL_MINUTES, DOMAIN, LOGGER
 
 if TYPE_CHECKING:
+    from homeassistant.config_entries import ConfigEntry
     from homeassistant.core import HomeAssistant
 
     from .api import CaernApiClient
+
+type CaernConfigEntry = ConfigEntry[CaernDataUpdateCoordinator]
 
 
 def _matricula(imovel: dict[str, Any]) -> str:
@@ -25,11 +28,14 @@ def _matricula(imovel: dict[str, Any]) -> str:
 class CaernDataUpdateCoordinator(DataUpdateCoordinator[dict[str, Any]]):
     """Puxa imóveis e, por imóvel, contas/histórico/ocorrência."""
 
-    def __init__(self, hass: HomeAssistant, client: CaernApiClient) -> None:
+    def __init__(
+        self, hass: HomeAssistant, entry: CaernConfigEntry, client: CaernApiClient
+    ) -> None:
         """Inicializa o coordinator."""
         super().__init__(
             hass,
             LOGGER,
+            config_entry=entry,
             name=DOMAIN,
             update_interval=timedelta(minutes=DEFAULT_SCAN_INTERVAL_MINUTES),
         )

@@ -4,16 +4,21 @@ from __future__ import annotations
 
 from typing import TYPE_CHECKING
 
-import voluptuous as vol
-from homeassistant.core import HomeAssistant, ServiceCall, ServiceResponse, SupportsResponse
+from homeassistant.core import (
+    HomeAssistant,
+    ServiceCall,
+    ServiceResponse,
+    SupportsResponse,
+)
 from homeassistant.exceptions import HomeAssistantError, ServiceValidationError
 from homeassistant.helpers import config_validation as cv
+import voluptuous as vol
 
 from .api import CaernApiClient, CaernApiError
 from .const import DOMAIN
 
 if TYPE_CHECKING:
-    from .data import CaernConfigEntry
+    from .coordinator import CaernConfigEntry
 
 SERVICE_AUTOLEITURA = "enviar_autoleitura"
 SERVICE_ADD_IMOVEL = "adicionar_imovel"
@@ -49,7 +54,7 @@ def _client(hass: HomeAssistant, call: ServiceCall) -> CaernApiClient:
     return entries[0].runtime_data.client
 
 
-def async_register_services(hass: HomeAssistant) -> None:
+def async_setup_services(hass: HomeAssistant) -> None:
     """Registra os serviços do domínio (idempotente)."""
     if hass.services.has_service(DOMAIN, SERVICE_AUTOLEITURA):
         return
@@ -57,7 +62,7 @@ def async_register_services(hass: HomeAssistant) -> None:
     async def _refresh() -> None:
         for entry in hass.config_entries.async_entries(DOMAIN):
             if getattr(entry, "runtime_data", None):
-                await entry.runtime_data.coordinator.async_request_refresh()
+                await entry.runtime_data.async_request_refresh()
 
     async def autoleitura(call: ServiceCall) -> ServiceResponse:
         client = _client(hass, call)

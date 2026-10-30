@@ -14,12 +14,12 @@ Chave Firebase do projeto `caernmobile` extraída do APK (google_api_key).
 
 from __future__ import annotations
 
+import asyncio
 import socket
 import time
 from typing import Any
 
 import aiohttp
-import async_timeout
 
 BASE_URL = "https://servermobile.caern.com.br/rest"
 FIREBASE_API_KEY = "AIzaSyCeahuUfDsqsCcaiPTv4Gf0WTEuJjg0cgo"
@@ -45,7 +45,9 @@ class CaernAuthError(CaernApiError):
 class CaernApiClient:
     """Cliente autenticado da CAERN (Firebase ID token como Authorization)."""
 
-    def __init__(self, email: str, password: str, session: aiohttp.ClientSession) -> None:
+    def __init__(
+        self, email: str, password: str, session: aiohttp.ClientSession
+    ) -> None:
         """email/password = login Firebase (e-mail/senha) do app CAERN."""
         self._email = email
         self._password = password
@@ -83,7 +85,7 @@ class CaernApiClient:
 
     async def _firebase(self, url: str, payload: dict[str, Any]) -> dict[str, Any]:
         try:
-            async with async_timeout.timeout(_TIMEOUT):
+            async with asyncio.timeout(_TIMEOUT):
                 resp = await self._session.post(
                     url, params={"key": FIREBASE_API_KEY}, json=payload
                 )
@@ -93,7 +95,11 @@ class CaernApiClient:
             raise CaernApiCommunicationError(msg) from err
         if resp.status >= 400:
             reason = (body.get("error") or {}).get("message", f"HTTP {resp.status}")
-            if reason in ("EMAIL_NOT_FOUND", "INVALID_PASSWORD", "INVALID_LOGIN_CREDENTIALS"):
+            if reason in (
+                "EMAIL_NOT_FOUND",
+                "INVALID_PASSWORD",
+                "INVALID_LOGIN_CREDENTIALS",
+            ):
                 msg = "e-mail ou senha inválidos"
                 raise CaernAuthError(msg)
             msg = f"Firebase recusou: {reason}"
@@ -121,7 +127,7 @@ class CaernApiClient:
         token = await self._token()
         url = f"{BASE_URL}/{path}"
         try:
-            async with async_timeout.timeout(_TIMEOUT):
+            async with asyncio.timeout(_TIMEOUT):
                 resp = await self._session.request(
                     method,
                     url,

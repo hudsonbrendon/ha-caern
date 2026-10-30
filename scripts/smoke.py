@@ -3,7 +3,7 @@
 Loga via Firebase (e-mail/senha) e despeja imóveis + contas + histórico, para
 validar os campos antes de instalar no HA. Credenciais ficam só na sua máquina.
 
-    pip install aiohttp async_timeout
+    pip install aiohttp
     CAERN_EMAIL=voce@email.com CAERN_PASSWORD='senha' python3 scripts/smoke.py
 """
 
@@ -47,12 +47,24 @@ async def main() -> None:
         for imv in imoveis:
             mat = imv.get("matricula")
             print(f"\n===== conta(s) matrícula {mat} =====")
-            print(json.dumps(await client.async_list_contas(mat), indent=2, ensure_ascii=False))
+            print(
+                json.dumps(
+                    await client.async_list_contas(mat), indent=2, ensure_ascii=False
+                )
+            )
             print(f"----- histórico {mat} -----")
-            print(json.dumps(await client.async_historico_consumo(mat), indent=2, ensure_ascii=False))
+            print(
+                json.dumps(
+                    await client.async_historico_consumo(mat),
+                    indent=2,
+                    ensure_ascii=False,
+                )
+            )
 
         print("\n===== quantidades =====")
-        print(json.dumps(await client.async_quantidades(), indent=2, ensure_ascii=False))
+        print(
+            json.dumps(await client.async_quantidades(), indent=2, ensure_ascii=False)
+        )
 
 
 if __name__ == "__main__":
