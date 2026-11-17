@@ -1,4 +1,17 @@
+<p align="center">
+  <img src="custom_components/caern/brand/logo@2x.png" alt="CAERN" height="128">
+</p>
+
 # CAERN — Home Assistant
+
+[![Tests](https://github.com/hudsonbrendon/ha-caern/actions/workflows/tests.yml/badge.svg)](https://github.com/hudsonbrendon/ha-caern/actions/workflows/tests.yml)
+[![Hassfest](https://github.com/hudsonbrendon/ha-caern/actions/workflows/hassfest.yml/badge.svg)](https://github.com/hudsonbrendon/ha-caern/actions/workflows/hassfest.yml)
+[![HACS](https://github.com/hudsonbrendon/ha-caern/actions/workflows/validate.yml/badge.svg)](https://github.com/hudsonbrendon/ha-caern/actions/workflows/validate.yml)
+[![Release](https://img.shields.io/github/v/release/hudsonbrendon/ha-caern?sort=semver)](https://github.com/hudsonbrendon/ha-caern/releases)
+[![Downloads](https://img.shields.io/github/downloads/hudsonbrendon/ha-caern/total)](https://github.com/hudsonbrendon/ha-caern/releases)
+[![HACS Custom](https://img.shields.io/badge/HACS-Custom-41BDF5.svg)](https://hacs.xyz/)
+[![Home Assistant](https://img.shields.io/badge/Home%20Assistant-2024.6.0%2B-18BCF2?logo=homeassistant&logoColor=white)](https://www.home-assistant.io/)
+[![License](https://img.shields.io/github/license/hudsonbrendon/ha-caern)](LICENSE)
 
 Integração não-oficial que traz os dados da sua conta de água **CAERN** (Rio
 Grande do Norte) para o Home Assistant: contas, consumo (m³), situação de
@@ -17,6 +30,9 @@ e-mail/senha**. Se você entra no app com **Google ou Facebook**, crie uma senha
 headless.
 
 ## Instalação (HACS)
+
+[![Abrir no HACS](https://my.home-assistant.io/badges/hacs_repository.svg)](https://my.home-assistant.io/redirect/hacs_repository/?owner=hudsonbrendon&repository=ha-caern&category=integration)
+[![Adicionar integração](https://my.home-assistant.io/badges/config_flow_start.svg)](https://my.home-assistant.io/redirect/config_flow_start/?domain=caern)
 
 1. HACS → repositórios customizados → `hudsonbrendon/ha-caern` (Integration).
 2. Instale "CAERN" e reinicie o Home Assistant.
