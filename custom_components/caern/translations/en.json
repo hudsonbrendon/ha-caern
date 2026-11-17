@@ -39,7 +39,7 @@
       "imoveis": {
         "name": "Properties"
       },
-      "registrosAbertos": {
+      "registros_abertos": {
         "name": "Open tickets"
       }
     },

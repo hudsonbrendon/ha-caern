@@ -203,12 +203,17 @@ class _ResumoSensor(CoordinatorEntity["CaernDataUpdateCoordinator"], SensorEntit
     _attr_has_entity_name = True
     _attr_state_class = SensorStateClass.MEASUREMENT
 
-    def __init__(self, coordinator: CaernDataUpdateCoordinator, key: str) -> None:
+    def __init__(
+        self,
+        coordinator: CaernDataUpdateCoordinator,
+        key: str,
+        translation_key: str | None = None,
+    ) -> None:
         """key = campo de `quantidades`."""
         super().__init__(coordinator)
         self._key = key
         self._attr_unique_id = f"caern_{key}"
-        self._attr_translation_key = key
+        self._attr_translation_key = translation_key or key
 
     @property
     def native_value(self) -> int | None:
@@ -237,4 +242,4 @@ class CaernRegistrosAbertosSensor(_ResumoSensor):
 
     def __init__(self, coordinator: CaernDataUpdateCoordinator) -> None:
         """Inicializa."""
-        super().__init__(coordinator, "registrosAbertos")
+        super().__init__(coordinator, "registrosAbertos", "registros_abertos")
